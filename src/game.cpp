@@ -3793,6 +3793,11 @@ void Game::ExecuteItem(int my_item)
 			break;
 		}
 
+		case 'M':
+		{
+			break;
+		}
+
 		case 'S':
 		{
 			if (inventory.my_item[my_item].in_use)

@@ -21,6 +21,7 @@ struct ACTION { enum
 {
 	NONE = 0, // IDLE/MOVE
 	ATTACK,
+	MAGIC,
 	/*HIT,*/
 	FALL,
 	DEAD,
@@ -34,6 +35,13 @@ struct WEAPON { enum
 	REGULAR_SWORD,
 	REGULAR_CROSSBOW,
 	SIZE
+};};
+
+struct MAGIC { enum
+{
+	NONE = 0,
+	BLOOD_SIGIL,
+	SIZE,
 };};
 
 struct SHIELD { enum
