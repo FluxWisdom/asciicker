@@ -2799,6 +2799,8 @@ void LoadSprites()
 	caps_sprite[1] = LoadSpriteBP("keyb-caps-b.xp", 0, false);
 	caps_sprite[2] = LoadSpriteBP("keyb-caps-c.xp", 0, false);
 
+	desert_plant = LoadSpriteBP("desert_plants.xp", 0, false);
+
 	fire_sprite = LoadSpriteBP("fire.xp", 0, false);
 
 	cultist_chant = LoadSpriteBP("cultist-chant.xp", 0, false);
