@@ -2759,6 +2759,7 @@ Sprite* player_naked = 0; // what to do?
 Sprite* character_button = 0;
 Sprite* inventory_sprite = 0;
 Sprite* fire_sprite = 0;
+Sprite* desert_plant = 0;
 
 Sprite* cultist_chant = 0;
 
