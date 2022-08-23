@@ -219,6 +219,9 @@ bool Inventory::InsertItem(Item* item, int xy[2])
 						case 'W':
 							hh->SetWeapon(0);
 							break;
+						case 'M':
+							hh->SetMagic(0);
+							break;
 						case 'S':
 							hh->SetShield(0);
 							break;
@@ -230,7 +233,7 @@ bool Inventory::InsertItem(Item* item, int xy[2])
 							break;
 					}
 
-					int reps[4] = { 0,0,0,0 };
+					int reps[5] = { 0,0,0,0,0 };
 					Sprite* sprite = GetSprite(&hh->req, hh->clr);
 					UpdateSpriteInst(world, item->inst, sprite, hh->pos, hh->dir, hh->anim, hh->frame, reps);
 				}

@@ -91,6 +91,7 @@ struct SpriteReq
 	int helmet;
 	int shield;
 	int weapon;
+	int magic;
 };
 
 struct ItemOwner
@@ -124,6 +125,7 @@ struct Character
 
 	bool SetActionNone(uint64_t stamp);
 	bool SetActionAttack(uint64_t stamp);
+	bool SetActionMagic(uint64_t stamp);
 	bool SetActionFall(uint64_t stamp);
 	bool SetActionStand(uint64_t stamp);
 	bool SetActionDead(uint64_t stamp);
@@ -192,6 +194,7 @@ struct Human : Character
 
 	// -------------
 
+	bool SetMagic(int ma);
 	bool SetWeapon(int w);
 	bool SetShield(int s);
 	bool SetHelmet(int h);

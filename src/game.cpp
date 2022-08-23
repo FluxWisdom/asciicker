@@ -1427,6 +1427,7 @@ bool Server::Proc(const uint8_t* ptr, int size)
 			h->req.helmet = (join->sprite >> 8) & 0xF;
 			h->req.shield = (join->sprite >> 4) & 0xF;
 			h->req.weapon = join->sprite & 0xF;
+			h->req.magic = join->sprite & 0xF;
 
 			h->clr = 0; // from server
 
@@ -1442,7 +1443,7 @@ bool Server::Proc(const uint8_t* ptr, int size)
 
 			// insert Inst to the world
 			int flags = INST_USE_TREE | INST_VISIBLE | INST_VOLATILE;
-			int reps[4] = { 0,0,0,0 };
+			int reps[5] = { 0,0,0,0,0 };
 			h->inst = CreateInst(world, h->sprite, flags, h->pos, h->dir, h->anim, h->frame, reps, 0, -1/*not storyline*/);
 
 			break;
@@ -1484,6 +1485,7 @@ bool Server::Proc(const uint8_t* ptr, int size)
 			h->req.helmet = (pose->sprite >> 8) & 0xF;
 			h->req.shield = (pose->sprite >> 4) & 0xF;
 			h->req.weapon = pose->sprite & 0xF;
+			h->req.magic = pose->sprite & 0xF;
 
 			h->sprite = GetSprite(&h->req, h->clr);
 
@@ -2725,17 +2727,20 @@ Keyb keyb;
 
 Sprite* player_nude = 0;
 
-Sprite* player[2][ARMOR::SIZE][HELMET::SIZE][SHIELD::SIZE][WEAPON::SIZE] = { 0 };
-Sprite* player_fall[2][ARMOR::SIZE][HELMET::SIZE][SHIELD::SIZE][WEAPON::SIZE] = { 0 };
-Sprite* player_attack[2][ARMOR::SIZE][HELMET::SIZE][SHIELD::SIZE][WEAPON::SIZE] = { 0 };
+Sprite* player[2][ARMOR::SIZE][HELMET::SIZE][SHIELD::SIZE][WEAPON::SIZE][MAGIC::SIZE] = { 0 };
+Sprite* player_fall[2][ARMOR::SIZE][HELMET::SIZE][SHIELD::SIZE][WEAPON::SIZE][MAGIC::SIZE] = { 0 };
+Sprite* player_attack[2][ARMOR::SIZE][HELMET::SIZE][SHIELD::SIZE][WEAPON::SIZE][MAGIC::SIZE] = { 0 };
+Sprite* player_magic[2][ARMOR::SIZE][HELMET::SIZE][SHIELD::SIZE][WEAPON::SIZE][MAGIC::SIZE] = { 0 };
 
-Sprite* wolfie[2][ARMOR::SIZE][HELMET::SIZE][SHIELD::SIZE][WEAPON::SIZE] = { 0 };
-Sprite* wolfie_attack[2][ARMOR::SIZE][HELMET::SIZE][SHIELD::SIZE][WEAPON::SIZE] = { 0 };
-Sprite* wolfie_fall[2][ARMOR::SIZE][HELMET::SIZE][SHIELD::SIZE][WEAPON::SIZE] = { 0 }; // todo
+Sprite* wolfie[2][ARMOR::SIZE][HELMET::SIZE][SHIELD::SIZE][WEAPON::SIZE][MAGIC::SIZE] = { 0 };
+Sprite* wolfie_attack[2][ARMOR::SIZE][HELMET::SIZE][SHIELD::SIZE][WEAPON::SIZE][MAGIC::SIZE] = { 0 };
+Sprite* wolfie_magic[2][ARMOR::SIZE][HELMET::SIZE][SHIELD::SIZE][WEAPON::SIZE][MAGIC::SIZE] = { 0 };
+Sprite* wolfie_fall[2][ARMOR::SIZE][HELMET::SIZE][SHIELD::SIZE][WEAPON::SIZE][MAGIC::SIZE] = { 0 }; // todo
 
-Sprite* bigbee[2][ARMOR::SIZE][HELMET::SIZE][SHIELD::SIZE][WEAPON::SIZE] = { 0 };
-Sprite* bigbee_attack[2][ARMOR::SIZE][HELMET::SIZE][SHIELD::SIZE][WEAPON::SIZE] = { 0 };
-Sprite* bigbee_fall[2][ARMOR::SIZE][HELMET::SIZE][SHIELD::SIZE][WEAPON::SIZE] = { 0 }; // todo
+Sprite* bigbee[2][ARMOR::SIZE][HELMET::SIZE][SHIELD::SIZE][WEAPON::SIZE][MAGIC::SIZE] = { 0 };
+Sprite* bigbee_attack[2][ARMOR::SIZE][HELMET::SIZE][SHIELD::SIZE][WEAPON::SIZE][MAGIC::SIZE] = { 0 };
+Sprite* bigbee_magic[2][ARMOR::SIZE][HELMET::SIZE][SHIELD::SIZE][WEAPON::SIZE][MAGIC::SIZE] = { 0 };
+Sprite* bigbee_fall[2][ARMOR::SIZE][HELMET::SIZE][SHIELD::SIZE][WEAPON::SIZE][MAGIC::SIZE] = { 0 }; // todo
 
 // dismount immediately when wolfie and/or player dies, evaluate them separately!
 // wolfie dismounting should separate wolfie -> player + wolf
@@ -2825,34 +2830,57 @@ void LoadSprites()
 
 					for (int w = 0; w < WEAPON::SIZE; w++)
 					{
-						sprintf(name, "player-%x%x%x%x.xp", a, h, s, w);
-						player[c][a][h][s][w] = LoadSpriteBP(name, recolor[c], false);
+						for (int m = 0; m < MAGIC::SIZE; m++)
+						{
+							sprintf(name, "player-%x%x%x%x%x.xp", a, h, s, w, m);
+							player[c][a][h][s][w][m] = LoadSpriteBP(name, recolor[c], false);
 
-						sprintf(name, "plydie-%x%x%x%x.xp", a, h, s, w);
-						player_fall[c][a][h][s][w] = LoadSpriteBP(name, recolor[c], false);
+							sprintf(name, "plydie-%x%x%x%x%x.xp", a, h, s, w, m);
+							player_fall[c][a][h][s][w][m] = LoadSpriteBP(name, recolor[c], false);
 
-						sprintf(name, "wolfie-%x%x%x%x.xp", a, h, s, w);
-						wolfie[c][a][h][s][w] = LoadSpriteBP(name, recolor[c], false);
-						wolfie_fall[c][a][h][s][w] = 0;
+							sprintf(name, "wolfie-%x%x%x%x%x.xp", a, h, s, w, m);
+							wolfie[c][a][h][s][w][m] = LoadSpriteBP(name, recolor[c], false);
+							wolfie_fall[c][a][h][s][w][m] = 0;
 
-						sprintf(name, "bigbee-%x%x%x%x.xp", a, h, s, w);
-						bigbee[c][a][h][s][w] = LoadSpriteBP(name, recolor[c], false);
-						bigbee_fall[c][a][h][s][w] = 0;
+							sprintf(name, "bigbee-%x%x%x%x%x.xp", a, h, s, w, m);
+							bigbee[c][a][h][s][w][m] = LoadSpriteBP(name, recolor[c], false);
+							bigbee_fall[c][a][h][s][w][m] = 0;
+						}
 					}
-
-					player_attack[c][a][h][s][WEAPON::NONE] = 0;
-					wolfie_attack[c][a][h][s][WEAPON::NONE] = 0;
-					for (int w = 1; w < WEAPON::SIZE; w++)
+					for (int m = 0; m < MAGIC::SIZE; m++)
 					{
-						sprintf(name, "attack-%x%x%x%x.xp", a, h, s, w);
-						player_attack[c][a][h][s][w] = LoadSpriteBP(name, recolor[c], false);
+						player_attack[c][a][h][s][WEAPON::NONE][m] = 0;
+						wolfie_attack[c][a][h][s][WEAPON::NONE][m] = 0;
+						for (int w = 1; w < WEAPON::SIZE; w++)
+						{
+							sprintf(name, "attack-%x%x%x%x%x.xp", a, h, s, w, m);
+							player_attack[c][a][h][s][w][m] = LoadSpriteBP(name, recolor[c], false);
 
-						sprintf(name, "wolack-%x%x%x%x.xp", a, h, s, w);
-						wolfie_attack[c][a][h][s][w] = LoadSpriteBP(name, recolor[c], false);
+							sprintf(name, "wolack-%x%x%x%x%x.xp", a, h, s, w, m);
+							wolfie_attack[c][a][h][s][w][m] = LoadSpriteBP(name, recolor[c], false);
 
-						//sprintf(name, "beeack-%x%x%x%x.xp", a, h, s, w);
-						//bigbee_attack[c][a][h][s][w] = LoadSpriteBP(name, recolor[c], false);
-						bigbee_attack[c][a][h][s][w] = 0;
+							//sprintf(name, "beeack-%x%x%x%x%x.xp", a, h, s, w, m);
+							//bigbee_attack[c][a][h][s][w][m] = LoadSpriteBP(name, recolor[c], false);
+							bigbee_attack[c][a][h][s][w][m] = 0;
+						}
+
+						for (int w = 0; w < WEAPON::SIZE; w++)
+						{
+							player_magic[c][a][h][s][w][MAGIC::NONE] = 0;
+							wolfie_magic[c][a][h][s][w][MAGIC::NONE] = 0;
+							for (int m = 1; m < MAGIC::SIZE; m++)
+							{
+								sprintf(name, "magic-%x%x%x%x%x.xp", a, h, s, w, m);
+								player_magic[c][a][h][s][w][m] = LoadSpriteBP(name, recolor[c], false);
+
+								sprintf(name, "wolack-%x%x%x%x%x.xp", a, h, s, w, m);
+								wolfie_magic[c][a][h][s][w][m] = LoadSpriteBP(name, recolor[c], false);
+
+								//sprintf(name, "beeack-%x%x%x%x%x.xp", a, h, s, w, m);
+								//bigbee_magic[c][a][h][s][w][m] = LoadSpriteBP(name, recolor[c], false);
+								bigbee_magic[c][a][h][s][w][m] = 0;
+							}
+						}
 					}
 				}
 			}
@@ -3035,6 +3063,7 @@ Sprite* GetSprite(const SpriteReq* req, int clr)
 	{
 		if (req->action == ACTION::NONE &&
 			req->weapon == WEAPON::NONE &&
+			req->magic == MAGIC::NONE &&
 			req->shield == SHIELD::NONE &&
 			req->helmet == HELMET::NONE &&
 			req->armor == ARMOR::NONE &&
@@ -3050,6 +3079,7 @@ Sprite* GetSprite(const SpriteReq* req, int clr)
 	{
 		if (req->action == ACTION::NONE &&
 			req->weapon == WEAPON::NONE &&
+			req->magic == MAGIC::NONE &&
 			req->shield == SHIELD::NONE &&
 			req->helmet == HELMET::NONE &&
 			req->armor == ARMOR::NONE &&
@@ -3065,6 +3095,9 @@ Sprite* GetSprite(const SpriteReq* req, int clr)
 		return 0;
 
 	if (req->weapon < 0 || req->weapon >= WEAPON::SIZE)
+		return 0;
+
+	if (req->magic < 0 || req->magic >= MAGIC::SIZE)
 		return 0;
 
 	if (req->shield < 0 || req->shield >= SHIELD::SIZE)
@@ -3083,18 +3116,21 @@ Sprite* GetSprite(const SpriteReq* req, int clr)
 			switch (req->action)
 			{
 				case ACTION::NONE:
-					return player[clr][req->armor][req->helmet][req->shield][req->weapon];
+					return player[clr][req->armor][req->helmet][req->shield][req->weapon][req->magic];
 
 				case ACTION::ATTACK:
 					if (req->weapon == WEAPON::REGULAR_CROSSBOW)
-						return player[clr][req->armor][req->helmet][req->shield][req->weapon];
+						return player[clr][req->armor][req->helmet][req->shield][req->weapon][req->magic];
 					else
-						return player_attack[clr][req->armor][req->helmet][req->shield][req->weapon];
+						return player_attack[clr][req->armor][req->helmet][req->shield][req->weapon][req->magic];
+
+				case ACTION::MAGIC:
+					return player_magic[clr][req->armor][req->helmet][req->shield][req->weapon][req->magic];
 
 				case ACTION::FALL:
 				case ACTION::DEAD:
 				case ACTION::STAND:
-					return player_fall[clr][req->armor][req->helmet][req->shield][req->weapon];
+					return player_fall[clr][req->armor][req->helmet][req->shield][req->weapon][req->magic];
 			}
 			return 0;
 		}
@@ -3104,18 +3140,21 @@ Sprite* GetSprite(const SpriteReq* req, int clr)
 			switch (req->action)
 			{
 				case ACTION::NONE:
-					return wolfie[clr][req->armor][req->helmet][req->shield][req->weapon];
+					return wolfie[clr][req->armor][req->helmet][req->shield][req->weapon][req->magic];
 
 				case ACTION::ATTACK:
 					if (req->weapon == WEAPON::REGULAR_CROSSBOW)
-						return wolfie[clr][req->armor][req->helmet][req->shield][req->weapon];
+						return wolfie[clr][req->armor][req->helmet][req->shield][req->weapon][req->magic];
 					else
-						return wolfie_attack[clr][req->armor][req->helmet][req->shield][req->weapon];
+						return wolfie_attack[clr][req->armor][req->helmet][req->shield][req->weapon][req->magic];
+
+				case ACTION::MAGIC:
+					return wolfie_magic[clr][req->armor][req->helmet][req->shield][req->weapon][req->magic];
 
 				case ACTION::FALL:
 				case ACTION::DEAD:
 				case ACTION::STAND:
-					return wolfie_fall[clr][req->armor][req->helmet][req->shield][req->weapon];
+					return wolfie_fall[clr][req->armor][req->helmet][req->shield][req->weapon][req->magic];
 			}	
 			return 0;
 		}
@@ -3125,18 +3164,21 @@ Sprite* GetSprite(const SpriteReq* req, int clr)
 			switch (req->action)
 			{
 			case ACTION::NONE:
-				return bigbee[clr][req->armor][req->helmet][req->shield][req->weapon];
+				return bigbee[clr][req->armor][req->helmet][req->shield][req->weapon][req->magic];
 
 			case ACTION::ATTACK:
 				if (req->weapon == WEAPON::REGULAR_CROSSBOW)
-					return bigbee[clr][req->armor][req->helmet][req->shield][req->weapon];
+					return bigbee[clr][req->armor][req->helmet][req->shield][req->weapon][req->magic];
 				else
-					return bigbee_attack[clr][req->armor][req->helmet][req->shield][req->weapon];
+					return bigbee_attack[clr][req->armor][req->helmet][req->shield][req->weapon][req->magic];
+
+			case ACTION::MAGIC:
+				return bigbee_magic[clr][req->armor][req->helmet][req->shield][req->weapon][req->magic];
 
 			case ACTION::FALL:
 			case ACTION::DEAD:
 			case ACTION::STAND:
-				return bigbee_fall[clr][req->armor][req->helmet][req->shield][req->weapon];
+				return bigbee_fall[clr][req->armor][req->helmet][req->shield][req->weapon][req->magic];
 			}
 			return 0;
 		}
@@ -3200,8 +3242,8 @@ Game* CreateGame(int water, float pos[3], float yaw, float dir, uint64_t stamp)
 			enemy->req.armor = fast_rand() % 11 < eg->armor ? ARMOR::NONE : ARMOR::REGULAR_ARMOR;
 			enemy->req.helmet = fast_rand() % 11 < eg->helmet ? HELMET::NONE : HELMET::REGULAR_HELMET;
 			enemy->req.shield = fast_rand() % 11 < eg->shield ? SHIELD::NONE : SHIELD::REGULAR_SHIELD;
-			enemy->req.weapon = fast_rand() % (eg->sword + eg->crossbow + 1) < eg->sword ?
-				WEAPON::REGULAR_SWORD : WEAPON::REGULAR_CROSSBOW;
+			enemy->req.weapon = fast_rand() % (eg->sword + eg->crossbow + 1) < eg->sword ? WEAPON::REGULAR_SWORD : WEAPON::REGULAR_CROSSBOW;
+			enemy->req.magic = MAGIC::NONE;
 			enemy->req.action = ACTION::NONE;
 
 			if (enemy->req.armor)
@@ -3342,6 +3384,7 @@ Game* CreateGame(int water, float pos[3], float yaw, float dir, uint64_t stamp)
 		enemy->req.helmet = HELMET::NONE + ((r >> 3) & 1);
 		enemy->req.shield = SHIELD::NONE + ((r >> 4) & 1);
 		enemy->req.weapon = WEAPON::NONE + 1;// ((r >> 5) % 3);
+		enemy->req.magic = MAGIC::NONE;
 		enemy->req.action = ACTION::NONE;
 
 		if (enemy->req.armor)
@@ -3469,6 +3512,7 @@ Game* CreateGame(int water, float pos[3], float yaw, float dir, uint64_t stamp)
 		buddy->req.helmet = HELMET::NONE + ((r >> 3) & 1);
 		buddy->req.shield = SHIELD::NONE + ((r >> 4) & 1);
 		buddy->req.weapon = WEAPON::NONE + 1; // ((r >> 5) % 3);
+		buddy->req.magic = MAGIC::NONE;
 		buddy->req.action = ACTION::NONE;
 
 		if (buddy->req.armor)
@@ -3616,6 +3660,7 @@ Game* CreateGame(int water, float pos[3], float yaw, float dir, uint64_t stamp)
 	g->player.req.helmet = HELMET::NONE;
 	g->player.req.shield = SHIELD::NONE; // REGULAR_SHIELD;
 	g->player.req.weapon = WEAPON::NONE;
+	g->player.req.magic = MAGIC::NONE;
 	g->player.req.action = ACTION::NONE;
 
 	g->player.clr = 0;
@@ -3760,6 +3805,11 @@ void Game::ExecuteItem(int my_item)
 			break;
 		}
 
+		case 'C': // coin
+		{
+			break;
+		}
+
 		case 'R':
 		{
 			inventory.my_item[my_item].in_use = !inventory.my_item[my_item].in_use;
@@ -3795,6 +3845,28 @@ void Game::ExecuteItem(int my_item)
 
 		case 'M':
 		{
+			if (inventory.my_item[my_item].in_use)
+			{
+				if (player.SetMagic(PLAYER_MAGIC_INDEX::MAGIC_NONE))
+				{
+					inventory.my_item[my_item].in_use = false;
+				}
+			}
+			else
+			{
+				if (player.SetMagic(item->proto->sub_kind))
+				{
+					for (int i = 0; i < inventory.my_items; i++)
+					{
+						if (inventory.my_item[i].in_use && inventory.my_item[i].item->proto->kind == item->proto->kind)
+						{
+							inventory.my_item[i].in_use = false;
+							break;
+						}
+					}
+					inventory.my_item[my_item].in_use = true;
+				}
+			}
 			break;
 		}
 
@@ -4249,7 +4321,8 @@ bool Character::SetActionAttack(uint64_t stamp)
 		return true;
 	if (req.action == ACTION::FALL || 
 		req.action == ACTION::STAND || 
-		req.action == ACTION::DEAD)
+		req.action == ACTION::DEAD || 
+		req.action == ACTION::MAGIC)
 		return false;
 
 	int old = req.action;
@@ -4273,6 +4346,36 @@ bool Character::SetActionAttack(uint64_t stamp)
 		anim = 0;
 		frame = 2;
 	}
+	action_stamp = stamp;
+	hit_tested = false;
+
+	return true;
+}
+
+bool Character::SetActionMagic(uint64_t stamp)
+{
+	if (req.action == ACTION::MAGIC)
+		return true;
+	if (req.action == ACTION::FALL || 
+		req.action == ACTION::STAND || 
+		req.action == ACTION::DEAD || 
+		req.action == ACTION::ATTACK)
+		return false;
+
+	int old = req.action;
+	req.action = ACTION::MAGIC;
+
+	Sprite* spr = GetSprite(&req, clr);
+	if (!spr)
+	{
+		req.action = old;
+		return false;
+	}
+	sprite = spr;
+
+	anim = 1;
+	frame = 0;
+
 	action_stamp = stamp;
 	hit_tested = false;
 
@@ -4381,6 +4484,27 @@ bool Human::SetWeapon(int w)
 	if (!spr)
 	{
 		req.weapon = old;
+		return false;
+	}
+	sprite = spr;
+
+	return true;
+}
+
+bool Human::SetMagic(int m)
+{
+	if (req.action == ACTION::MAGIC)
+		return false; 
+	if (m == req.magic)
+		return true;
+
+	int old = req.magic;
+	req.magic = m;
+
+	Sprite* spr = GetSprite(&req, clr);
+	if (!spr)
+	{
+		req.magic = old;
 		return false;
 	}
 	sprite = spr;
@@ -7075,6 +7199,8 @@ void Game::OnKeyb(GAME_KEYB keyb, int key)
 							case 'F': // food
 							case 'P': // potion
 							case 'D': // drink
+							case 'C': // coin
+							case 'M': // magic
 								break;
 							default:
 								CancelItemContacts();
