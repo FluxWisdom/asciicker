@@ -6133,25 +6133,25 @@ void Game::Render(uint64_t _stamp, AnsiCell* ptr, int width, int height)
 			int max_elaps = a->sprite->atlas->height;
 			if (elaps >= max_elaps)
 			{
-				if (a->sprite == item_proto_lib[40].sprite_2d)
+				if (a->sprite == item_proto_lib[41].sprite_2d)
 				{
 					// grey potion hack
 					player.SetMount(MOUNT::WOLF);
 				}
 				else
-				if (a->sprite == item_proto_lib[39].sprite_2d)
+				if (a->sprite == item_proto_lib[40].sprite_2d)
 				{
 					// gold potion hack
 					player.SetMount(MOUNT::BEE);
 				}
 				else
-				if (a->sprite == item_proto_lib[38].sprite_2d)
+				if (a->sprite == item_proto_lib[39].sprite_2d)
 				{
 					// cyan potion hack
 					player.SetMount(MOUNT::NONE);
 				}
 				else
-				if (a->sprite == item_proto_lib[34].sprite_2d)
+				if (a->sprite == item_proto_lib[35].sprite_2d)
 				{
 					// healing potion hack
 					player.HP = player.MAX_HP;
@@ -6593,8 +6593,9 @@ void Game::Render(uint64_t _stamp, AnsiCell* ptr, int width, int height)
 		// float val = 0.5*(1.0 + sinf(f*0.02));
 
 		float val = (float)player.HP / player.MAX_HP;
+		float valmp = (float)player.MP / player.MAX_MP;
 		bar.Paint(ptr, width, height, val, hp_xyw, false);
-		bar.Paint(ptr, width, height, 1.0f, mp_xyw, true);
+		bar.Paint(ptr, width, height, valmp, mp_xyw, true);
 
 		BlitSprite(ptr, width, height, character_button->atlas + 0, bars_pos-7, height - character_button->atlas[0].height);
 		BlitSprite(ptr, width, height, character_button->atlas + 1, 7-bars_pos + width - character_button->atlas[1].width, height - character_button->atlas[1].height);
