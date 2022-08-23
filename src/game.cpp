@@ -2754,6 +2754,8 @@ Sprite* character_button = 0;
 Sprite* inventory_sprite = 0;
 Sprite* fire_sprite = 0;
 
+Sprite* cultist_chant = 0;
+
 Sprite* LoadSpriteBP(const char* name, const uint8_t* recolor, bool detached)
 {
 	char path[1024];
@@ -2792,6 +2794,8 @@ void LoadSprites()
 	caps_sprite[2] = LoadSpriteBP("keyb-caps-c.xp", 0, false);
 
 	fire_sprite = LoadSpriteBP("fire.xp", 0, false);
+
+	cultist_chant = LoadSpriteBP("cultist-chant.xp", 0, false);
 
 	player_nude = LoadSpriteBP("player-nude.xp", 0, false);
 
@@ -2865,11 +2869,14 @@ void LoadSprites()
 	Sprite* item_armor =  LOAD_SPRITE("item-armor.xp");
 	Sprite* item_crossbow  = LOAD_SPRITE("item-crossbow.xp");
 	Sprite* item_flail =  LOAD_SPRITE("item-flail.xp");
+	Sprite* item_blood_sigil =  LOAD_SPRITE("item-blood-sigil.xp");
 
 	Sprite* item_white_ring = LOAD_SPRITE("item-white-ring.xp");
 	Sprite* item_cyan_ring = LOAD_SPRITE("item-cyan-ring.xp");
 	Sprite* item_gold_ring = LOAD_SPRITE("item-gold-ring.xp");
 	Sprite* item_pink_ring = LOAD_SPRITE("item-pink-ring.xp");
+
+	Sprite* item_chuck_coin = LOAD_SPRITE("item-chuck-coin.xp");
 
 	Sprite* item_meat =   LOAD_SPRITE("item-meat.xp");
 	Sprite* item_egg =    LOAD_SPRITE("item-egg.xp");
@@ -2926,6 +2933,9 @@ void LoadSprites()
 	Sprite* grid_gold_ring = LOAD_SPRITE("grid-gold-ring.xp");
 	Sprite* grid_pink_ring = LOAD_SPRITE("grid-pink-ring.xp");
 
+	// coins_1x1
+	Sprite* grid_chuck_coin = LOAD_SPRITE("grid-chuck-coin.xp");
+
 	// food_2x2
 	Sprite* grid_meat = LOAD_SPRITE("grid-meat.xp");
 	Sprite* grid_egg = LOAD_SPRITE("grid-egg.xp");
@@ -2952,6 +2962,9 @@ void LoadSprites()
 	Sprite* grid_gold_potion = LOAD_SPRITE("grid-gold-potion.xp");
 	Sprite* grid_grey_potion = LOAD_SPRITE("grid-grey-potion.xp");
 
+	// magic items_2x3
+	Sprite* grid_blood_sigil = LOAD_SPRITE("grid-blood-sigil.xp");
+
 	static const ItemProto item_proto[] = 
 	{
 	//  {kind, sub,                        weight, 3d_sprite,    2d_sprite,   desc}
@@ -2971,6 +2984,8 @@ void LoadSprites()
 		{ 'R', PLAYER_RING_INDEX::RING_CYAN,  10, item_cyan_ring,  grid_cyan_ring,   "Unidentified Cyan Ring" },
 		{ 'R', PLAYER_RING_INDEX::RING_GOLD,  10, item_gold_ring,  grid_gold_ring,   "Unidentified Gold Ring" },
 		{ 'R', PLAYER_RING_INDEX::RING_PINK,  10, item_pink_ring,  grid_pink_ring,   "Unidentified Pink Ring" },
+
+		{ 'C', PLAYER_COIN_INDEX::CHUCK_COIN, 10, item_chuck_coin, grid_chuck_coin,  "Coin" },
 
 		{ 'H', PLAYER_HELMET_INDEX::HELMET_NORMAL, 1000, item_helmet, grid_light_helmet, "Light Helmet" },
 		{ 'H', PLAYER_HELMET_INDEX::HELMET_NORMAL, 2000, item_helmet, grid_heavy_helmet, "Heavy Helmet" },
@@ -3003,6 +3018,8 @@ void LoadSprites()
 		{ 'P', PLAYER_POTION_INDEX::POTION_CYAN,   150, item_cyan_potion,   grid_cyan_potion,  "Unidentified Cyan Potion" },
 		{ 'P', PLAYER_POTION_INDEX::POTION_GOLD,   150, item_gold_potion,   grid_gold_potion,  "Unidentified Gold Potion" },
 		{ 'P', PLAYER_POTION_INDEX::POTION_GREY,   150, item_grey_potion,   grid_grey_potion,  "Unidentified Grey Potion" },
+
+		{ 'M', PLAYER_MAGIC_INDEX::BLOOD_SIGIL,  5000,  item_blood_sigil,  grid_blood_sigil,  "Blood Sigil" },
 
 		{ 0 }
 	};
