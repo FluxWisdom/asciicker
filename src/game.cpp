@@ -244,6 +244,7 @@ extern char base_path[];
 static const int stand_us_per_frame = 30000;
 static const int fall_us_per_frame = 30000;
 static const int attack_us_per_frame = 20000;
+static const int magic_us_per_frame = 10000;
 
 static const uint8_t black = 16;
 static const uint8_t white =   16 + 5 * 1 + 5 * 6 + 5 * 36;
@@ -1499,7 +1500,7 @@ bool Server::Proc(const uint8_t* ptr, int size)
 
 			if (h->inst)
 			{
-				int reps[4];
+				int reps[5];
 				UpdateSpriteInst(world, h->inst, h->sprite, h->pos, h->dir, h->anim, h->frame, reps);
 			}
 
@@ -3589,7 +3590,7 @@ Game* CreateGame(int water, float pos[3], float yaw, float dir, uint64_t stamp)
 		buddy->frame = 0;
 
 		int flags = INST_USE_TREE | INST_VISIBLE | INST_VOLATILE;
-		int reps[4] = { 0,0,0,0 };
+		int reps[5] = { 0,0,0,0,0 };
 
 		float xyz[3] = { pos[0] + fast_rand()%21 - 10, pos[1] + fast_rand() % 21 - 10, 131 + 200 };
 
@@ -3687,7 +3688,7 @@ Game* CreateGame(int water, float pos[3], float yaw, float dir, uint64_t stamp)
 	// renderer will hide its client sprite
 
 	int flags = INST_USE_TREE | INST_VISIBLE | INST_VOLATILE;
-	int reps[4] = { 0,0,0,0 };
+	int reps[5] = { 0,0,0,0,0 };
 	g->player_inst = CreateInst(world, g->player.sprite, flags, pos, yaw, g->player.anim, g->player.frame, reps, 0, -1/*not in story*/);
 	SetInstSpriteData(g->player_inst, &g->player);
 
@@ -3813,7 +3814,7 @@ void Game::ExecuteItem(int my_item)
 			break;
 		}
 
-		case 'C': // coin
+		case 'C':
 		{
 			break;
 		}
@@ -5539,7 +5540,7 @@ void Game::Render(uint64_t _stamp, AnsiCell* ptr, int width, int height)
 			{
 				case PLAYER_MAGIC_INDEX::BLOOD_SIGIL:
 				{
-					int frame_index = (_stamp - player.action_stamp) / attack_us_per_frame;
+					int frame_index = (_stamp - player.action_stamp) / magic_us_per_frame;
 
 					Character* h = &player;
 
