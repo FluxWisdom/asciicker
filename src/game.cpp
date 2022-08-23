@@ -4815,6 +4815,13 @@ void Game::Render(uint64_t _stamp, AnsiCell* ptr, int width, int height)
 		io.jump = false;
 	}
 
+	if (player.req.action == ACTION::MAGIC)
+	{
+		io.x_force = 0;
+		io.y_force = 0;
+		io.jump = false;
+	}
+
 	// blocked by enemies? (closest one)
 	// ...
 
