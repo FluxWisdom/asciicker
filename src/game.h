@@ -97,7 +97,7 @@ struct SpriteReq
 struct ItemOwner
 {
 	// NPCs carrying items should inherit from it
-	static const int max_items = 5;
+	static const int max_items = 6;
 	int items;
 	struct
 	{
@@ -122,6 +122,7 @@ struct Character
 	uint64_t action_stamp;
 	bool hit_tested;
 	int HP, MAX_HP;
+	int MP, MAX_MP;
 
 	bool SetActionNone(uint64_t stamp);
 	bool SetActionAttack(uint64_t stamp);

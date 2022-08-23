@@ -3224,6 +3224,8 @@ Game* CreateGame(int water, float pos[3], float yaw, float dir, uint64_t stamp)
 
 			enemy->MAX_HP = 100;
 			enemy->HP = (i + 1) * enemy->MAX_HP / eg->alive_max;
+			enemy->MAX_MP = 100;
+			enemy->MP = enemy->MAX_MP;
 
 			enemy->enemy = true;
 
@@ -3251,7 +3253,7 @@ Game* CreateGame(int water, float pos[3], float yaw, float dir, uint64_t stamp)
 				Item* item = CreateItem();
 				item->count = 1;
 				item->inst = 0;
-				item->proto = item_proto_lib + rand() % 2 + 19;
+				item->proto = item_proto_lib + rand() % 2 + 20;
 				item->purpose = Item::OWNED;
 				enemy->has[enemy->items].in_use = true;
 				enemy->has[enemy->items].item = item;
@@ -3263,7 +3265,7 @@ Game* CreateGame(int water, float pos[3], float yaw, float dir, uint64_t stamp)
 				Item* item = CreateItem();
 				item->count = 1;
 				item->inst = 0;
-				item->proto = item_proto_lib + rand() % 2 + 15;
+				item->proto = item_proto_lib + rand() % 2 + 16;
 				item->purpose = Item::OWNED;
 				enemy->has[enemy->items].in_use = true;
 				enemy->has[enemy->items].item = item;
@@ -3275,7 +3277,7 @@ Game* CreateGame(int water, float pos[3], float yaw, float dir, uint64_t stamp)
 				Item* item = CreateItem();
 				item->count = 1;
 				item->inst = 0;
-				item->proto = item_proto_lib + rand() % 2 + 17;
+				item->proto = item_proto_lib + rand() % 2 + 18;
 				item->purpose = Item::OWNED;
 				enemy->has[enemy->items].in_use = true;
 				enemy->has[enemy->items].item = item;
@@ -3363,6 +3365,8 @@ Game* CreateGame(int water, float pos[3], float yaw, float dir, uint64_t stamp)
 
 		enemy->MAX_HP = 100;
 		enemy->HP = (i + 1) * enemy->MAX_HP / enemies;
+		enemy->MAX_MP = 100;
+		enemy->MP = enemy->MAX_MP;
 
 		enemy->enemy = true;
 
@@ -3392,7 +3396,7 @@ Game* CreateGame(int water, float pos[3], float yaw, float dir, uint64_t stamp)
 			Item* item = CreateItem();
 			item->count = 1;
 			item->inst = 0;
-			item->proto = item_proto_lib + rand() % 2 + 19;
+			item->proto = item_proto_lib + rand() % 2 + 20;
 			item->purpose = Item::OWNED;
 			enemy->has[enemy->items].in_use = true;
 			enemy->has[enemy->items].item = item;
@@ -3404,7 +3408,7 @@ Game* CreateGame(int water, float pos[3], float yaw, float dir, uint64_t stamp)
 			Item* item = CreateItem();
 			item->count = 1;
 			item->inst = 0;
-			item->proto = item_proto_lib + rand() % 2 + 15;
+			item->proto = item_proto_lib + rand() % 2 + 16;
 			item->purpose = Item::OWNED;
 			enemy->has[enemy->items].in_use = true;
 			enemy->has[enemy->items].item = item;
@@ -3416,7 +3420,7 @@ Game* CreateGame(int water, float pos[3], float yaw, float dir, uint64_t stamp)
 			Item* item = CreateItem();
 			item->count = 1;
 			item->inst = 0;
-			item->proto = item_proto_lib + rand() % 2 + 17;
+			item->proto = item_proto_lib + rand() % 2 + 18;
 			item->purpose = Item::OWNED;
 			enemy->has[enemy->items].in_use = true;
 			enemy->has[enemy->items].item = item;
@@ -3497,6 +3501,8 @@ Game* CreateGame(int water, float pos[3], float yaw, float dir, uint64_t stamp)
 		// init buddy!
 		buddy->MAX_HP = 100;
 		buddy->HP = (i+1) * buddy->MAX_HP / buddies;
+		buddy->MAX_MP = 100;
+		buddy->MP = buddy->MAX_MP;
 
 		buddy->enemy = false;
 		buddy->master = &g->player;
@@ -3520,7 +3526,7 @@ Game* CreateGame(int water, float pos[3], float yaw, float dir, uint64_t stamp)
 			Item* item = CreateItem();
 			item->count = 1;
 			item->inst = 0;
-			item->proto = item_proto_lib + rand() % 2 + 19;
+			item->proto = item_proto_lib + rand() % 2 + 20;
 			item->purpose = Item::OWNED;
 			buddy->has[buddy->items].in_use = true;
 			buddy->has[buddy->items].item = item;
@@ -3532,7 +3538,7 @@ Game* CreateGame(int water, float pos[3], float yaw, float dir, uint64_t stamp)
 			Item* item = CreateItem();
 			item->count = 1;
 			item->inst = 0;
-			item->proto = item_proto_lib + rand() % 2 + 15;
+			item->proto = item_proto_lib + rand() % 2 + 16;
 			item->purpose = Item::OWNED;
 			buddy->has[buddy->items].in_use = true;
 			buddy->has[buddy->items].item = item;
@@ -3544,7 +3550,7 @@ Game* CreateGame(int water, float pos[3], float yaw, float dir, uint64_t stamp)
 			Item* item = CreateItem();
 			item->count = 1;
 			item->inst = 0;
-			item->proto = item_proto_lib + rand() % 2 + 17;
+			item->proto = item_proto_lib + rand() % 2 + 18;
 			item->purpose = Item::OWNED;
 			buddy->has[buddy->items].in_use = true;
 			buddy->has[buddy->items].item = item;
@@ -3650,6 +3656,8 @@ Game* CreateGame(int water, float pos[3], float yaw, float dir, uint64_t stamp)
 	// init player!
 	g->player.MAX_HP = 200;
 	g->player.HP = g->player.MAX_HP;
+	g->player.MAX_MP = 200;
+	g->player.MP = g->player.MAX_MP;
 	g->player.master = 0;
 	g->player.target = 0;
 	g->player.followers = 0;
