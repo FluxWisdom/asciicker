@@ -5526,6 +5526,46 @@ void Game::Render(uint64_t _stamp, AnsiCell* ptr, int width, int height)
 			break;
 		}
 
+		case ACTION::MAGIC:
+		{
+			switch(player.req.magic)
+			{
+				case PLAYER_MAGIC_INDEX::BLOOD_SIGIL:
+				{
+					int frame_index = (_stamp - player.action_stamp) / attack_us_per_frame;
+
+					Character* h = &player;
+
+					if (player.MP >= 25)
+					{
+						if (frame_index > 5 && !h->hit_tested)
+						{
+							// do hit test, once per attack!
+							h->hit_tested = true;
+
+							player.MP -= 25;
+							player.HP += rand() % 50;
+							if (player.HP > player.MAX_HP)
+							{
+								player.HP = player.MAX_HP;
+							}
+						}
+					}
+
+					io.x_force = 0;
+					io.y_force = 0;
+
+					int frames = 10;
+					assert(frame_index >= 0);
+
+					if (frame_index >= frames)
+						player.SetActionNone(_stamp);
+					break;
+				}
+			}
+			break;
+		}
+
 		case ACTION::FALL:
 		{
 			// animate, check if finished -> stay at last frame
@@ -6914,6 +6954,9 @@ void Game::OnKeyb(GAME_KEYB keyb, int key)
 		{
 			if (key == A3D_SPACE)
 				input.jump = true;
+
+			if (key == A3D_RSHIFT)
+				player.SetActionMagic(stamp);
 
 			/*
 			// HANDLED AS CHAR (common for all)
