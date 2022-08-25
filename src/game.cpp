@@ -2910,6 +2910,7 @@ void LoadSprites()
 
 	Sprite* item_chuck_coin = LOAD_SPRITE("item-chuck-coin.xp");
 	Sprite* item_blood_vial = LOAD_SPRITE("item-blood-vial.xp");
+	Sprite* item_rock = LOAD_SPRITE("item-rock.xp");
 
 	Sprite* item_meat =   LOAD_SPRITE("item-meat.xp");
 	Sprite* item_egg =    LOAD_SPRITE("item-egg.xp");
@@ -2998,12 +2999,15 @@ void LoadSprites()
 	// magic weapons_2x3
 	Sprite* grid_blood_sigil = LOAD_SPRITE("grid-blood-sigil.xp");
 
-	// magic items_1x2
+	// hemalurgy items_1x2
 	Sprite* grid_blood_vial = LOAD_SPRITE("grid-blood-vial.xp");
+
+	// hemalurgy items_2x2
+	Sprite* grid_rock = LOAD_SPRITE("grid-rock.xp");
 
 	static const ItemProto item_proto[] = 
 	{
-	//  {kind, sub,                        weight, 3d_sprite,    2d_sprite,   desc}
+	//  	{kind, sub,                           weight,3d_sprite,     2d_sprite,            desc}
 		{ 'W', PLAYER_WEAPON_INDEX::MACE,     20000, item_mace,     grid_big_mace,        "Giant's Mace" },
 		{ 'W', PLAYER_WEAPON_INDEX::HAMMER,   20000, item_hammer,   grid_big_hammer,      "Giant's Hammer" },
 		{ 'W', PLAYER_WEAPON_INDEX::HAMMER,   20000, item_hammer,   grid_big_axe,         "Giant's Axe" },
@@ -3055,8 +3059,9 @@ void LoadSprites()
 		{ 'P', PLAYER_POTION_INDEX::POTION_GOLD,   150, item_gold_potion,   grid_gold_potion,  "Unidentified Gold Potion" },
 		{ 'P', PLAYER_POTION_INDEX::POTION_GREY,   150, item_grey_potion,   grid_grey_potion,  "Unidentified Grey Potion" },
 
-		{ 'M', PLAYER_MAGIC_INDEX::BLOOD_SIGIL,  5000,  item_blood_sigil,  grid_blood_sigil,  "Blood Sigil" },
-		{ 'M', PLAYER_MAGIC_INDEX::BLOOD_VIAL,  1000,  item_blood_vial,  grid_blood_vial,  "Vial of Heretic Blood" },
+		{ 'M', PLAYER_MAGIC_INDEX::BLOOD_SIGIL,     5000,  item_blood_sigil,  grid_blood_sigil,  "Blood Sigil" },
+		{ 'He', PLAYER_HEMALURGY_INDEX::BLOOD_VIAL,  1000,  item_blood_vial,   grid_blood_vial,   "Vial of Heretic Blood" },
+		{ 'He', PLAYER_HEMALURGY_INDEX::ROCK,        2000,  item_rock,         grid_rock,          "Rock" },
 
 		{ 0 }
 	};
@@ -3818,6 +3823,35 @@ void Game::ExecuteItem(int my_item)
 				consume_anims++;
 
 				inventory.RemoveItem(my_item, 0, 0);
+			}
+			break;
+		}
+
+		case 'He': // hemalurgical items
+		{
+			if (PLAYER_HEMALURGY_INDEX::BLOOD_VIAL)
+			{
+				if (item->count > 1)
+					item->count--;
+				else
+				{
+					// giving pos==null doesn't create world's instance and destroys item
+					if (consume_anims==16)
+					{
+						memmove(consume_anim,consume_anim+1,sizeof(ConsumeAnim)*15);
+						consume_anims--;
+					}
+
+					ConsumeAnim* a = consume_anim + consume_anims;
+
+					a->pos[0] = inventory.my_item[my_item].xy[0];
+					a->pos[1] = inventory.my_item[my_item].xy[1];
+					a->sprite = inventory.my_item[my_item].item->proto->sprite_2d;
+					a->stamp = stamp;
+					consume_anims++;
+
+					inventory.RemoveItem(my_item, 0, 0);
+				}
 			}
 			break;
 		}
