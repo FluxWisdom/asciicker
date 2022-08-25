@@ -2909,6 +2909,7 @@ void LoadSprites()
 	Sprite* item_pink_ring = LOAD_SPRITE("item-pink-ring.xp");
 
 	Sprite* item_chuck_coin = LOAD_SPRITE("item-chuck-coin.xp");
+	Sprite* item_blood_vial = LOAD_SPRITE("item-blood-vial.xp");
 
 	Sprite* item_meat =   LOAD_SPRITE("item-meat.xp");
 	Sprite* item_egg =    LOAD_SPRITE("item-egg.xp");
@@ -2994,8 +2995,11 @@ void LoadSprites()
 	Sprite* grid_gold_potion = LOAD_SPRITE("grid-gold-potion.xp");
 	Sprite* grid_grey_potion = LOAD_SPRITE("grid-grey-potion.xp");
 
-	// magic items_2x3
+	// magic weapons_2x3
 	Sprite* grid_blood_sigil = LOAD_SPRITE("grid-blood-sigil.xp");
+
+	// magic items_1x2
+	Sprite* grid_blood_vial = LOAD_SPRITE("grid-blood-vial.xp");
 
 	static const ItemProto item_proto[] = 
 	{
@@ -3052,6 +3056,7 @@ void LoadSprites()
 		{ 'P', PLAYER_POTION_INDEX::POTION_GREY,   150, item_grey_potion,   grid_grey_potion,  "Unidentified Grey Potion" },
 
 		{ 'M', PLAYER_MAGIC_INDEX::BLOOD_SIGIL,  5000,  item_blood_sigil,  grid_blood_sigil,  "Blood Sigil" },
+		{ 'M', PLAYER_MAGIC_INDEX::BLOOD_VIAL,  1000,  item_blood_vial,  grid_blood_vial,  "Vial of Heretic Blood" },
 
 		{ 0 }
 	};
