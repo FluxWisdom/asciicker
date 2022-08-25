@@ -6206,11 +6206,21 @@ void Game::Render(uint64_t _stamp, AnsiCell* ptr, int width, int height)
 					// healing potion hack
 					player.HP = player.MAX_HP;
 				}
-
+				else
 				if (a->sprite == item_proto_lib[36].sprite_2d)
 				{
 					// mana potion hack
 					player.MP = player.MAX_MP;
+				}
+				else
+				if (a->sprite == item_proto_lib[43].sprite_2d)
+				{
+					if ()
+					{
+						player.HP += rand() % 100;
+					}
+					else
+					player.HP += rand() % 65;
 				}
 				
 
