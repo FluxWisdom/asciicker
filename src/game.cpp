@@ -6215,12 +6215,12 @@ void Game::Render(uint64_t _stamp, AnsiCell* ptr, int width, int height)
 				else
 				if (a->sprite == item_proto_lib[43].sprite_2d)
 				{
-					if ()
+					if (player.req.weapon == MAGIC::BLOOD_SIGIL)
 					{
 						player.HP += rand() % 100;
 					}
 					else
-					player.HP += rand() % 65;
+					player.HP += rand() % 35;
 				}
 				
 
