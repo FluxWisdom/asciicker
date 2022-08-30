@@ -2999,10 +2999,10 @@ void LoadSprites()
 	// magic weapons_2x3
 	Sprite* grid_blood_sigil = LOAD_SPRITE("grid-blood-sigil.xp");
 
-	// hemalurgy items_1x2
+	// sanguilurgy items_1x2
 	Sprite* grid_blood_vial = LOAD_SPRITE("grid-blood-vial.xp");
 
-	// hemalurgy items_2x2
+	// sanguilurgy items_2x2
 	Sprite* grid_rock = LOAD_SPRITE("grid-rock.xp");
 
 	static const ItemProto item_proto[] = 
@@ -3060,8 +3060,8 @@ void LoadSprites()
 		{ 'P', PLAYER_POTION_INDEX::POTION_GREY,   150, item_grey_potion,   grid_grey_potion,  "Unidentified Grey Potion" },
 
 		{ 'M', PLAYER_MAGIC_INDEX::BLOOD_SIGIL,     5000,  item_blood_sigil,  grid_blood_sigil,  "Blood Sigil" },
-		{ 'He', PLAYER_HEMALURGY_INDEX::BLOOD_VIAL,  1000,  item_blood_vial,   grid_blood_vial,   "Vial of Heretic Blood" },
-		{ 'He', PLAYER_HEMALURGY_INDEX::ROCK,        2000,  item_rock,         grid_rock,          "Rock" },
+		{ 'He', PLAYER_SANGUILURGY_INDEX::BLOOD_VIAL,  1000,  item_blood_vial,   grid_blood_vial,   "Vial of Heretic Blood" },
+		{ 'He', PLAYER_SANGUILURGY_INDEX::ROCK,        2000,  item_rock,         grid_rock,          "Rock" },
 
 		{ 0 }
 	};
@@ -3829,7 +3829,7 @@ void Game::ExecuteItem(int my_item)
 
 		case 'He': // hemalurgical items
 		{
-			if (PLAYER_HEMALURGY_INDEX::BLOOD_VIAL)
+			if (PLAYER_SANGUILURGY_INDEX::BLOOD_VIAL)
 			{
 				if (item->count > 1)
 					item->count--;
