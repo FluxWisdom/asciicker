@@ -3060,8 +3060,8 @@ void LoadSprites()
 		{ 'P', PLAYER_POTION_INDEX::POTION_GREY,   150, item_grey_potion,   grid_grey_potion,  "Unidentified Grey Potion" },
 
 		{ 'M', PLAYER_MAGIC_INDEX::BLOOD_SIGIL,     5000,  item_blood_sigil,  grid_blood_sigil,  "Blood Sigil" },
-		{ 'He', PLAYER_SANGUILURGY_INDEX::BLOOD_VIAL,  1000,  item_blood_vial,   grid_blood_vial,   "Vial of Heretic Blood" },
-		{ 'He', PLAYER_SANGUILURGY_INDEX::ROCK,        2000,  item_rock,         grid_rock,          "Rock" },
+		{ 'Sa', PLAYER_SANGUILURGY_INDEX::BLOOD_VIAL,  1000,  item_blood_vial,   grid_blood_vial,   "Vial of Heretic Blood" },
+		{ 'Sa', PLAYER_SANGUILURGY_INDEX::ROCK,        2000,  item_rock,         grid_rock,          "Rock" },
 
 		{ 0 }
 	};
@@ -3827,7 +3827,7 @@ void Game::ExecuteItem(int my_item)
 			break;
 		}
 
-		case 'He': // hemalurgical items
+		case 'Sa': // sanguilurgical items
 		{
 			if (PLAYER_SANGUILURGY_INDEX::BLOOD_VIAL)
 			{
