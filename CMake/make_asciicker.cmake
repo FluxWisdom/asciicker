@@ -30,9 +30,9 @@ set(ASCIICKER_SOURCE
 )
 
 set(ASCIICKER_CXX_FLAGS	)
-set(ASCIICKER_CPP_FLAGS	-save-temps=obj -pthread -Og)
+set(ASCIICKER_CPP_FLAGS	-save-temps=obj -pthread)
 set(ASCIICKER_C_FLAGS	)
-set(ASCIICKER_LD_FLAGS	-g -save-temps=obj -pthread -Og -lutil -lGL -lX11 -lXinerama -lSDL2 -lpulse)
+set(ASCIICKER_LD_FLAGS	-save-temps=obj -pthread -lutil -lGL -lX11 -lXinerama -lSDL2 -lpulse)
 
 add_executable(${TARGET} ${ASCIICKER_SOURCE})
 

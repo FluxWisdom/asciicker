@@ -37,7 +37,7 @@ set(ASCIIID_MAC_SOURCE
 	"src/gamepad.cpp"
 )
 
-set(ASCIIID_MAC_CXX_FLAGS	-std=c++17 -g)
+set(ASCIIID_MAC_CXX_FLAGS	-std=c++17)
 set(ASCIIID_MAC_CPP_FLAGS	-save-temps=obj -pthread)
 set(ASCIIID_MAC_C_FLAGS		)
 set(ASCIIID_MAC_LD_FLAGS	-save-temps=obj -pthread -lutil -framework OpenGL -lSDL2-2.0.0)

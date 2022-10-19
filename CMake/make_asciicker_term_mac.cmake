@@ -27,7 +27,7 @@ set(ASCIICKER_TERM_MAC_SOURCE
 set(ASCIICKER_TERM_MAC_CXX_FLAGS	-std=c++17)
 set(ASCIICKER_TERM_MAC_CPP_FLAGS	-save-temps=obj -pthread)
 set(ASCIICKER_TERM_MAC_C_FLAGS		)
-set(ASCIICKER_TERM_MAC_LD_FLAGS		-save-temps=obj -pthread -O3 -framework Audiotoolbox -framework CoreAudio -framework CoreServices)
+set(ASCIICKER_TERM_MAC_LD_FLAGS		-save-temps=obj -pthread -framework Audiotoolbox -framework CoreAudio -framework CoreServices)
 
 add_executable(${TARGET} ${ASCIICKER_TERM_MAC_SOURCE})
 
