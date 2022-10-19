@@ -7,6 +7,8 @@ set(TARGET "asciiid")
 set(ASCIIID_MAC_SOURCE
 	"src/asciiid.cpp"
 	"src/term.cpp"
+	"src/font1.cpp"
+	"src/gamepad.cpp"
 	"src/x11.cpp"
 	"src/sdl.cpp"
 	"src/urdo.cpp"
@@ -29,6 +31,8 @@ set(ASCIIID_MAC_SOURCE
 	"src/imgui/imgui_demo.cpp"
 	"src/imgui/imgui_draw.cpp"
 	"src/imgui/imgui_widgets.cpp"
+	"src/audio.cpp"
+	"src/stb_vorbis.cpp"
 	"src/font1.cpp"
 	"src/gamepad.cpp"
 )
