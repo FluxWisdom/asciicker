@@ -26,6 +26,8 @@ SRCS :=	gl.c \
 		upng.c \
 		tinfl.c \
 		rgba8.cpp \
+		font1.cpp \
+		gamepad.cpp \
 		audio.cpp \
 		stb_vorbis.cpp
 
