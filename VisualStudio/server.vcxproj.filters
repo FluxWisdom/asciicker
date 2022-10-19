@@ -42,6 +42,7 @@
     <ClInclude Include="..\src\enemygen.h" />
     <ClInclude Include="..\src\font1.h" />
     <ClInclude Include="..\src\gamepad.h" />
+	<ClInclude Include="..\src\audio.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\world.cpp">
@@ -82,5 +83,6 @@
     <ClCompile Include="..\src\gamepad.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+	<ClCompile Include="..\src\audio.cpp" />
   </ItemGroup>
 </Project>
