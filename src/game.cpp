@@ -2999,10 +2999,10 @@ void LoadSprites()
 	// magic weapons_2x3
 	Sprite* grid_blood_sigil = LOAD_SPRITE("grid-blood-sigil.xp");
 
-	// sanguilurgy items_1x2
+	// hemalurgy items_1x2
 	Sprite* grid_blood_vial = LOAD_SPRITE("grid-blood-vial.xp");
 
-	// sanguilurgy items_2x2
+	// hemalurgy items_2x2
 	Sprite* grid_rock = LOAD_SPRITE("grid-rock.xp");
 
 	static const ItemProto item_proto[] = 
@@ -3024,8 +3024,6 @@ void LoadSprites()
 		{ 'R', PLAYER_RING_INDEX::RING_CYAN,  10, item_cyan_ring,  grid_cyan_ring,   "Unidentified Cyan Ring" },
 		{ 'R', PLAYER_RING_INDEX::RING_GOLD,  10, item_gold_ring,  grid_gold_ring,   "Unidentified Gold Ring" },
 		{ 'R', PLAYER_RING_INDEX::RING_PINK,  10, item_pink_ring,  grid_pink_ring,   "Unidentified Pink Ring" },
-
-		{ 'C', PLAYER_COIN_INDEX::CHUCK_COIN, 10, item_chuck_coin, grid_chuck_coin,  "Coin" },
 
 		{ 'H', PLAYER_HELMET_INDEX::HELMET_NORMAL, 1000, item_helmet, grid_light_helmet, "Light Helmet" },
 		{ 'H', PLAYER_HELMET_INDEX::HELMET_NORMAL, 2000, item_helmet, grid_heavy_helmet, "Heavy Helmet" },
@@ -3060,8 +3058,10 @@ void LoadSprites()
 		{ 'P', PLAYER_POTION_INDEX::POTION_GREY,   150, item_grey_potion,   grid_grey_potion,  "Unidentified Grey Potion" },
 
 		{ 'M', PLAYER_MAGIC_INDEX::BLOOD_SIGIL,     5000,  item_blood_sigil,  grid_blood_sigil,  "Blood Sigil" },
-		{ 'Sa', PLAYER_SANGUILURGY_INDEX::BLOOD_VIAL,  1000,  item_blood_vial,   grid_blood_vial,   "Vial of Heretic Blood" },
-		{ 'Sa', PLAYER_SANGUILURGY_INDEX::ROCK,        2000,  item_rock,         grid_rock,          "Rock" },
+		{ 'S', PLAYER_SANGUILURGY_INDEX::BLOOD_VIAL,  1000,  item_blood_vial,   grid_blood_vial,   "Vial of Heretic Blood" },
+		{ 'He', PLAYER_SANGUILURGY_INDEX::ROCK,        2000,  item_rock,         grid_rock,          "Rock" },
+
+		{ 'C', PLAYER_COIN_INDEX::CHUCK_COIN, 10, item_chuck_coin, grid_chuck_coin,  "Coin" },
 
 		{ 0 }
 	};
@@ -3827,7 +3827,7 @@ void Game::ExecuteItem(int my_item)
 			break;
 		}
 
-		case 'Sa': // sanguilurgical items
+		case 'He': // hemalurgical items
 		{
 			if (PLAYER_SANGUILURGY_INDEX::BLOOD_VIAL)
 			{
