@@ -2911,6 +2911,7 @@ void LoadSprites()
 	Sprite* item_chuck_coin = LOAD_SPRITE("item-chuck-coin.xp");
 	Sprite* item_blood_vial = LOAD_SPRITE("item-blood-vial.xp");
 	Sprite* item_rock = LOAD_SPRITE("item-rock.xp");
+	Sprite* item_desert_flower = LOAD_SPRITE("item-desert-flower.xp");
 
 	Sprite* item_meat =   LOAD_SPRITE("item-meat.xp");
 	Sprite* item_egg =    LOAD_SPRITE("item-egg.xp");
@@ -3005,6 +3006,9 @@ void LoadSprites()
 	// hemalurgy items_2x2
 	Sprite* grid_rock = LOAD_SPRITE("grid-rock.xp");
 
+	// hemalurgy items_2x3
+	Sprite* grid_desert_flower = LOAD_SPRITE("grid-desert-flower.xp");
+
 	static const ItemProto item_proto[] = 
 	{
 	//  	{kind, sub,                           weight,3d_sprite,     2d_sprite,            desc}
@@ -3058,8 +3062,9 @@ void LoadSprites()
 		{ 'P', PLAYER_POTION_INDEX::POTION_GREY,   150, item_grey_potion,   grid_grey_potion,  "Unidentified Grey Potion" },
 
 		{ 'M', PLAYER_MAGIC_INDEX::BLOOD_SIGIL,     5000,  item_blood_sigil,  grid_blood_sigil,  "Blood Sigil" },
-		{ 'S', PLAYER_SANGUILURGY_INDEX::BLOOD_VIAL,  1000,  item_blood_vial,   grid_blood_vial,   "Vial of Heretic Blood" },
-		{ 'He', PLAYER_SANGUILURGY_INDEX::ROCK,        2000,  item_rock,         grid_rock,          "Rock" },
+		{ 'Sa', PLAYER_SANGUILURGY_INDEX::BLOOD_VIAL,  1000,  item_blood_vial,   grid_blood_vial,   "Vial of Heretic Blood" },
+		{ 'Sa', PLAYER_SANGUILURGY_INDEX::ROCK,        2000,  item_rock,         grid_rock,          "Rock" },
+		{ 'Sa', PLAYER_SANGUILURGY_INDEX::DESERT_FLOWER,        500,  item_desert_flower,         grid_desert_flower,          "Desert Flower" },
 
 		{ 'C', PLAYER_COIN_INDEX::CHUCK_COIN, 10, item_chuck_coin, grid_chuck_coin,  "Coin" },
 
@@ -3827,7 +3832,7 @@ void Game::ExecuteItem(int my_item)
 			break;
 		}
 
-		case 'He': // hemalurgical items
+		case 'Sa': // sanguilurgical items
 		{
 			if (PLAYER_SANGUILURGY_INDEX::BLOOD_VIAL)
 			{
