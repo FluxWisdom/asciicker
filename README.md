@@ -1,5 +1,7 @@
 # Asciicker
 
+yes i know enemy drops are bugged i'm fixing it
+
 ![GIF](misc/asciicker.gif)
 
 ### Important note about scripts and makefiles:
