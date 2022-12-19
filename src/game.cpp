@@ -2760,6 +2760,7 @@ Sprite* character_button = 0;
 Sprite* inventory_sprite = 0;
 Sprite* fire_sprite = 0;
 Sprite* desert_plant = 0;
+Sprite* blood_desert_plant = 0;
 
 Sprite* cultist_chant = 0;
 
@@ -2801,6 +2802,7 @@ void LoadSprites()
 	caps_sprite[2] = LoadSpriteBP("keyb-caps-c.xp", 0, false);
 
 	desert_plant = LoadSpriteBP("desert_plants.xp", 0, false);
+	blood_desert_plant = LoadSpriteBP("blood_desert_plants.xp", 0, false);
 
 	fire_sprite = LoadSpriteBP("fire.xp", 0, false);
 
@@ -3061,10 +3063,11 @@ void LoadSprites()
 		{ 'P', PLAYER_POTION_INDEX::POTION_GOLD,   150, item_gold_potion,   grid_gold_potion,  "Unidentified Gold Potion" },
 		{ 'P', PLAYER_POTION_INDEX::POTION_GREY,   150, item_grey_potion,   grid_grey_potion,  "Unidentified Grey Potion" },
 
-		{ 'M', PLAYER_MAGIC_INDEX::BLOOD_SIGIL,     5000,  item_blood_sigil,  grid_blood_sigil,  "Blood Sigil" },
-		{ 'Sa', PLAYER_SANGUILURGY_INDEX::BLOOD_VIAL,  1000,  item_blood_vial,   grid_blood_vial,   "Vial of Heretic Blood" },
-		{ 'Sa', PLAYER_SANGUILURGY_INDEX::ROCK,        2000,  item_rock,         grid_rock,          "Rock" },
-		{ 'Sa', PLAYER_SANGUILURGY_INDEX::DESERT_FLOWER,        500,  item_desert_flower,         grid_desert_flower,          "Desert Flower" },
+		{ 'M', PLAYER_MAGIC_INDEX::BLOOD_SIGIL,        5000,  item_blood_sigil,  grid_blood_sigil,  "Blood Sigil" },
+
+		{ 'Sa', PLAYER_SANGUILURGY_INDEX::BLOOD_VIAL,  		1000, item_blood_vial,   	  grid_blood_vial,    "Vial of Heretic Blood" },
+		{ 'Sa', PLAYER_SANGUILURGY_INDEX::ROCK,        		2000, item_rock,         	  grid_rock,          "Rock" },
+		{ 'Sa', PLAYER_SANGUILURGY_INDEX::DESERT_FLOWER,        500,  item_desert_flower,         grid_desert_flower, "Desert Flower" },
 
 		{ 'C', PLAYER_COIN_INDEX::CHUCK_COIN, 10, item_chuck_coin, grid_chuck_coin,  "Coin" },
 
@@ -3834,7 +3837,7 @@ void Game::ExecuteItem(int my_item)
 
 		case 'Sa': // sanguilurgical items
 		{
-			if (PLAYER_SANGUILURGY_INDEX::BLOOD_VIAL)
+			if (inventory.my_item[my_item].in_use==PLAYER_SANGUILURGY_INDEX::BLOOD_VIAL)
 			{
 				if (item->count > 1)
 					item->count--;
@@ -6218,7 +6221,7 @@ void Game::Render(uint64_t _stamp, AnsiCell* ptr, int width, int height)
 					player.MP = player.MAX_MP;
 				}
 				else
-				if (a->sprite == item_proto_lib[43].sprite_2d)
+				if (a->sprite == item_proto_lib[42].sprite_2d)
 				{
 					if (player.req.weapon == MAGIC::BLOOD_SIGIL)
 					{
