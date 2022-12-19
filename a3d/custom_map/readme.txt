@@ -1,1 +1,1 @@
-The custom map will require you to use my version of asciicker as it has some items from it, just letting you know
+The custom map will require you to use my version of asciicker as it has some assets from it, just letting you know
