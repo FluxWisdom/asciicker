@@ -3837,29 +3837,26 @@ void Game::ExecuteItem(int my_item)
 
 		case 'Sa': // sanguilurgical items
 		{
-			if (inventory.my_item[my_item].in_use==PLAYER_SANGUILURGY_INDEX::BLOOD_VIAL)
+			if (item->count > 1)
+				item->count--;
+			else
 			{
-				if (item->count > 1)
-					item->count--;
-				else
+				// giving pos==null doesn't create world's instance and destroys item
+				if (consume_anims==16)
 				{
-					// giving pos==null doesn't create world's instance and destroys item
-					if (consume_anims==16)
-					{
-						memmove(consume_anim,consume_anim+1,sizeof(ConsumeAnim)*15);
-						consume_anims--;
-					}
-
-					ConsumeAnim* a = consume_anim + consume_anims;
-
-					a->pos[0] = inventory.my_item[my_item].xy[0];
-					a->pos[1] = inventory.my_item[my_item].xy[1];
-					a->sprite = inventory.my_item[my_item].item->proto->sprite_2d;
-					a->stamp = stamp;
-					consume_anims++;
-
-					inventory.RemoveItem(my_item, 0, 0);
+					memmove(consume_anim,consume_anim+1,sizeof(ConsumeAnim)*15);
+					consume_anims--;
 				}
+
+				ConsumeAnim* a = consume_anim + consume_anims;
+
+				a->pos[0] = inventory.my_item[my_item].xy[0];
+				a->pos[1] = inventory.my_item[my_item].xy[1];
+				a->sprite = inventory.my_item[my_item].item->proto->sprite_2d;
+				a->stamp = stamp;
+				consume_anims++;
+
+				inventory.RemoveItem(my_item, 0, 0);
 			}
 			break;
 		}
