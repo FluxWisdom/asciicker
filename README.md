@@ -24,7 +24,7 @@ Firstly, you need to choose build type:
 and unzip it, the repository folder should be named `asciicker-master`.
 
 3) Open VisualStudio and click `Import project`, then navigate to the folder where you stored `asciicker-master` and select it
-4) Retarget solutions (this step may not be needed in some cases)
+4) Retarget projects (this step may not be needed in some cases)
 
 
 ![Retarget](misc/VS_Retarget.png)
