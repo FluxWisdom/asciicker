@@ -19,12 +19,14 @@ set(SERVER_SOURCE
 	"src/tinfl.c"
 	"src/font1.cpp"
 	"src/gamepad.cpp"
+	"src/audio.cpp"
+	"src/stb_vorbis.cpp"
 )
 
 set(SERVER_CXX_FLAGS	-std=c++17)
 set(SERVER_CPP_FLAGS	-save-temps=obj -pthread)
 set(SERVER_C_FLAGS		)
-set(SERVER_LD_FLAGS		-save-temps=obj -pthread -lutil)
+set(SERVER_LD_FLAGS		-save-temps=obj -pthread -lutil -lpulse)
 
 add_executable(${TARGET} ${SERVER_SOURCE})
 

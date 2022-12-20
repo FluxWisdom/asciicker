@@ -28,7 +28,7 @@ set(ASCIICKER_MAC_SOURCE
 )
 
 set(ASCIICKER_MAC_CXX_FLAGS	-std=c++17)
-set(ASCIICKER_MAC_CPP_FLAGS	-g -save-temps=obj -pthread)
+set(ASCIICKER_MAC_CPP_FLAGS	-save-temps=obj -pthread)
 set(ASCIICKER_MAC_C_FLAGS	)
 set(ASCIICKER_MAC_LD_FLAGS	-save-temps=obj -pthread -lutil -framework OpenGL -lXinerama -lSDL2-2.0.0)
 

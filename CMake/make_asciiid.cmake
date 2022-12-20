@@ -6,6 +6,8 @@ set(TARGET "asciiid")
 
 set(ASCIIID_SOURCE
 	"src/asciiid.cpp"
+	"src/audio.cpp"
+	"src/stb_vorbis.cpp"
 	"src/term.cpp"
 	"src/x11.cpp"
 	"src/sdl.cpp"
@@ -34,9 +36,9 @@ set(ASCIIID_SOURCE
 )
 
 set(ASCIIID_CXX_FLAGS	)
-set(ASCIIID_CPP_FLAGS	-g -save-temps=obj -pthread)
+set(ASCIIID_CPP_FLAGS	-save-temps=obj -pthread)
 set(ASCIIID_C_FLAGS		)
-set(ASCIIID_LD_FLAGS	-save-temps=obj -pthread -lGL -lX11 -lXinerama -lutil -lSDL2)
+set(ASCIIID_LD_FLAGS	-save-temps=obj -pthread -lGL -lX11 -lXinerama -lutil -lSDL2 -lpulse)
 
 add_executable(${TARGET} ${ASCIIID_SOURCE})
 

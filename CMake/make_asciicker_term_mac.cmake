@@ -20,12 +20,14 @@ set(ASCIICKER_TERM_MAC_SOURCE
 	"src/rgba8.cpp"
 	"src/gamepad.cpp"
 	"src/font1.cpp"
+	"src/audio.cpp"
+	"src/stb_vorbis.cpp"
 )
 
 set(ASCIICKER_TERM_MAC_CXX_FLAGS	-std=c++17)
 set(ASCIICKER_TERM_MAC_CPP_FLAGS	-save-temps=obj -pthread)
 set(ASCIICKER_TERM_MAC_C_FLAGS		)
-set(ASCIICKER_TERM_MAC_LD_FLAGS		-save-temps=obj -pthread -lutil)
+set(ASCIICKER_TERM_MAC_LD_FLAGS		-save-temps=obj -pthread -framework Audiotoolbox -framework CoreAudio -framework CoreServices)
 
 add_executable(${TARGET} ${ASCIICKER_TERM_MAC_SOURCE})
 
