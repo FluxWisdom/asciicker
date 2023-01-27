@@ -1,7 +1,6 @@
 # Asciicker
 
 yes i know enemy drops are bugged i'm fixing it
-yes i know the game is broken, i'm porting it to y8
 
 ![GIF](misc/asciicker.gif)
 
