@@ -69,7 +69,7 @@
 
     </style>
 
-    <script type='text/javascript'>
+    <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', function () {
           navigator.serviceWorker.register('asciicker.js').then(function (registration) {
@@ -157,23 +157,7 @@
     </script>
 
 
-    <script type='text/javascript'>
-
-      var audio_ctx = null;
-      var audio_cb = null;
-      var audio_node = null;
-      var audio_port = null;
-      var audio_call_cache = null;
-
-      function audioResume()
-      {
-        if (audio_ctx)
-        {
-          if (audio_ctx.state === 'suspended' || audio_ctx.state === 'interrupted')
-            audio_ctx.resume();
-        }
-      }
-
+    <script>
       var ak_connection = null;
       var Join = null;
       var Load = null;
@@ -216,20 +200,13 @@
         var port_override = "";
         //var port_override = ":8080";
 
-
-        // Y8 is NOT READY yet
-        Load(player_name);
-        Resize(null);
-        window.requestAnimationFrame(AsciickerLoop);
-        return;
-
 				if (location.protocol !== 'https:') 
 				{
-					connection = new WebSocket('ws://' + location.hostname + port_override + '/ws/y8/');
+					connection = new WebSocket('ws://' + location.hostname + port_override + '/ws/y7/');
 				}
 				else
 				{
-					connection = new WebSocket('wss://' + location.hostname + port_override + '/ws/y8/');
+					connection = new WebSocket('wss://' + location.hostname + port_override + '/ws/y7/');
         }
         
         connection.binaryType = "arraybuffer";
@@ -341,7 +318,7 @@
 			}
     </script>
 
-    <script type='text/javascript'>
+    <script>
 
       var Render = null;
       var Size = null;
@@ -506,7 +483,6 @@
         function(e)
         {
           e.preventDefault();
-          audioResume();
           var data = event.changedTouches;
           for (var i=0; i<data.length; i++)
           {
@@ -761,8 +737,6 @@
           //var str = "repeat=" + e.repeat + " | " + "code=" + e.code + " | " + "key=" + e.key;
           //console.log( str );
 
-          audioResume();
-
           if (e.key == "F11" || (e.key == "-" || e.key == "+" || e.key == "=" || e.key == "0") && e.ctrlKey)
             return; // do not process / prevent 
 
@@ -958,7 +932,6 @@
         window.addEventListener("gamepadconnected", 
           function(e) 
           {
-            audioResume();
             console.log("connected");
 
             if (gamepad<0)
@@ -1048,7 +1021,6 @@
         window.addEventListener("wheel", 
         function(e)
         {
-          audioResume();
           var x = e.pageX;
           var y = e.pageY;
           if (ak_ratio>1.0)
@@ -1068,7 +1040,6 @@
         window.addEventListener("mousedown", 
         function(e) 
         {
-          audioResume();
           var x = e.pageX;
           var y = e.pageY;
           if (ak_ratio>1.0)
@@ -1132,7 +1103,6 @@
         window.addEventListener("focus", 
         function(e)
         {
-          audioResume();
           Focus(1);
           e.preventDefault();
         }, { passive: false });
@@ -1316,7 +1286,7 @@
 
         window.addEventListener("resize",Resize); 
 
-        Connect();
+        Connect(); // window.requestAnimationFrame(AsciickerLoop);
       }
     </script>
 
@@ -1394,7 +1364,6 @@
         };
       };
     </script>
-
     {{{ SCRIPT }}}
   </body>
 </html>

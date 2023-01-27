@@ -84,9 +84,6 @@
     <ClInclude Include="..\src\gamepad.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-	<ClInclude Include="..\src\audio.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\gl.c">
@@ -159,9 +156,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\gamepad.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-	<ClCompile Include="audio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

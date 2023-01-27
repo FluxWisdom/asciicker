@@ -6,8 +6,6 @@ BIN := build/asciiid
 
 # source files
 SRCS :=	asciiid.cpp \
-		audio.cpp \
-		stb_vorbis.cpp \
 		term.cpp \
 		x11.cpp \
 		sdl.cpp \

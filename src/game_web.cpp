@@ -9,9 +9,6 @@
 #include "world.h"
 #include "render.h"
 
-#include "audio.h"
-#include "fast_rand.h"
-
 #include <time.h>
 
 char base_path[1024] = "./"; // (const)
@@ -191,7 +188,6 @@ int main(int argc, char* argv[])
 
 int Main()
 {
-    InitAudio();
     // here we must already know if serer on not server
 
     float water = 55.0f;

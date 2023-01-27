@@ -7,8 +7,6 @@ set(TARGET "asciiid")
 set(ASCIIID_MAC_SOURCE
 	"src/asciiid.cpp"
 	"src/term.cpp"
-	"src/font1.cpp"
-	"src/gamepad.cpp"
 	"src/x11.cpp"
 	"src/sdl.cpp"
 	"src/urdo.cpp"
@@ -31,13 +29,11 @@ set(ASCIIID_MAC_SOURCE
 	"src/imgui/imgui_demo.cpp"
 	"src/imgui/imgui_draw.cpp"
 	"src/imgui/imgui_widgets.cpp"
-	"src/audio.cpp"
-	"src/stb_vorbis.cpp"
 	"src/font1.cpp"
 	"src/gamepad.cpp"
 )
 
-set(ASCIIID_MAC_CXX_FLAGS	-std=c++17)
+set(ASCIIID_MAC_CXX_FLAGS	-std=c++17 -g)
 set(ASCIIID_MAC_CPP_FLAGS	-save-temps=obj -pthread)
 set(ASCIIID_MAC_C_FLAGS		)
 set(ASCIIID_MAC_LD_FLAGS	-save-temps=obj -pthread -lutil -framework OpenGL -lSDL2-2.0.0)

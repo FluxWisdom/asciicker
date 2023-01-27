@@ -23,16 +23,14 @@ set(ASCIICKER_SOURCE
 	"src/upng.c"
 	"src/tinfl.c"
 	"src/rgba8.cpp"
-	"src/audio.cpp"
-	"src/stb_vorbis.cpp"
 	"src/gamepad.cpp"
 	"src/font1.cpp"
 )
 
 set(ASCIICKER_CXX_FLAGS	)
-set(ASCIICKER_CPP_FLAGS	-save-temps=obj -pthread)
+set(ASCIICKER_CPP_FLAGS	-g -save-temps=obj -pthread)
 set(ASCIICKER_C_FLAGS	)
-set(ASCIICKER_LD_FLAGS	-save-temps=obj -pthread -lutil -lGL -lX11 -lXinerama -lSDL2 -lpulse)
+set(ASCIICKER_LD_FLAGS	-save-temps=obj -pthread -lutil -lGL -lX11 -lXinerama -lgpm -lSDL2)
 
 add_executable(${TARGET} ${ASCIICKER_SOURCE})
 

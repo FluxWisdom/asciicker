@@ -170,7 +170,6 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\audio.h" />
     <ClInclude Include="..\src\enemygen.h" />
     <ClInclude Include="..\src\fast_rand.h" />
     <ClInclude Include="..\src\font1.h" />
@@ -195,7 +194,6 @@
     <ClInclude Include="..\src\world.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\audio.cpp" />
     <ClCompile Include="..\src\enemygen.cpp" />
     <ClCompile Include="..\src\font1.cpp" />
     <ClCompile Include="..\src\game.cpp" />

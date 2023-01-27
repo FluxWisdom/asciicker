@@ -213,8 +213,7 @@ Sprite* LoadSprite(const char* path, const char* name, /*bool has_refl,*/ const 
 	};
 
 	GZ gz;
-	int r;
-	r=fread(&gz, 10, 1, f);
+	fread(&gz, 10, 1, f);
 
 	/*
 	assert(gz.id1 == 31 && gz.id2 == 139 && "gz identity");
@@ -230,8 +229,8 @@ Sprite* LoadSprite(const char* path, const char* name, /*bool has_refl,*/ const 
 	if (gz.flg & (1 << 2/*FEXTRA*/))
 	{
 		int hi, lo;
-		r=fread(&hi, 1, 1, f);
-		r=fread(&lo, 1, 1, f);
+		fread(&hi, 1, 1, f);
+		fread(&lo, 1, 1, f);
 
 		int len = (hi << 8) | lo;
 		fseek(f, len, SEEK_CUR);
@@ -243,7 +242,7 @@ Sprite* LoadSprite(const char* path, const char* name, /*bool has_refl,*/ const 
 		do
 		{
 			ch = 0;
-			r=fread(&ch, 1, 1, f);
+			fread(&ch, 1, 1, f);
 		} while (ch);
 	}
 
@@ -253,14 +252,14 @@ Sprite* LoadSprite(const char* path, const char* name, /*bool has_refl,*/ const 
 		do
 		{
 			ch = 0;
-			r=fread(&ch, 1, 1, f);
+			fread(&ch, 1, 1, f);
 		} while (ch);
 	}
 
 	if (gz.flg & (1 << 1/*FFHCRC*/))
 	{
 		uint16_t crc;
-		r=fread(&crc, 2, 1, f);
+		fread(&crc, 2, 1, f);
 	}
 
 	// deflated data blocks ...
@@ -273,7 +272,7 @@ Sprite* LoadSprite(const char* path, const char* name, /*bool has_refl,*/ const 
 	unsigned char* in = (unsigned char*)malloc(insize);
 	fseek(f, now, SEEK_SET);
 
-	r=fread(in, 1, insize, f);
+	fread(in, 1, insize, f);
 
 
 	size_t out_size=0;
@@ -285,8 +284,8 @@ Sprite* LoadSprite(const char* path, const char* name, /*bool has_refl,*/ const 
 	// GZ OUTRO:
 
 	uint32_t crc32, isize;
-	r=fread(&crc32, 4, 1, f);
-	r=fread(&isize, 4, 1, f);
+	fread(&crc32, 4, 1, f);
+	fread(&isize, 4, 1, f);
 	fclose(f);
 
 	// assert(out && isize == *(uint32_t*)out);

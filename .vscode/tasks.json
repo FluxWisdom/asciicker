@@ -6,7 +6,7 @@
         {
             "label": "run",
             "type": "shell",
-            "command": "build/asciicker",
+            "command": ".run/game",
             "problemMatcher": [
                 "$gcc"
             ],
@@ -18,7 +18,7 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "Scripts/build.sh",
+            "command": "./build.sh",
             "problemMatcher": [
                 "$gcc"
             ],
@@ -30,7 +30,7 @@
         {
             "label": "clean",
             "type": "shell",
-            "command": "Scripts/clean.sh",
+            "command": "./clean.sh",
             "problemMatcher": [
                 "$gcc"
             ],
@@ -38,18 +38,6 @@
                 "kind": "build",
                 "isDefault": true
             }
-        },
-        {
-            "label": "build-web",
-            "type": "shell",
-            "command": "Scripts/build-web.sh",
-            "problemMatcher": [
-                "$gcc"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
-        }
+        }        
     ]
 }
