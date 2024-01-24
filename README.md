@@ -2,8 +2,6 @@
 
 yes i know enemy drops are bugged i'm fixing it
 
-![PNG](misc/logo-modded-doa.png)
-
 ![GIF](misc/asciicker.gif)
 
 ### Important note about scripts and makefiles:
